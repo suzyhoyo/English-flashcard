@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商务英语核心词汇 32 (Pro Edition)</title>
+    <style>
+        :root {
+            --primary: #007aff; /* 商务蓝 */
+            --secondary: #5ac8fa;
+            --bg: #f2f2f7;
+            --card-bg: #ffffff;
+            --text-main: #1c1c1e;
+            --text-sub: #8e8e93;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            color: var(--text-main);
+            font-size: 1.8rem;
+            margin: 0;
+            font-weight: 800;
+        }
+
+        .header p {
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        /* 3D 舞台 */
+        .scene {
+            width: 100%;
+            max-width: 400px;
+            height: 500px; /* 卡片高度 */
+            perspective: 1200px; /* 透视深度 */
+            cursor: pointer;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+            border-radius: 24px;
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card.is-flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card__face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--card-bg);
+            border-radius: 24px;
+            padding: 30px;
+            box-sizing: border-box;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* --- 正面样式 --- */
+        .card__face--front {
+            background: linear-gradient(145deg, #ffffff 0%, #f0f5ff 100%);
+        }
+
+        .word-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-bottom: 30px;
+            font-weight: 700;
+            opacity: 0.8;
+        }
+
+        .english-word {
+            font-size: 3rem; /* 单词字号大一点 */
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1.2;
+            margin-bottom: 40px;
+            word-wrap: break-word;
+        }
+
+        .click-hint {
+            position: absolute;
+            bottom: 30px;
+            font-size: 0.8rem;
+            color: #aeaeb2;
+            animation: bounce 2s infinite;
+        }
+
+        /* --- 背面样式 --- */
+        .card__face--back {
+            transform: rotateY(180deg);
+            background-color: #fff;
+            justify-content: flex-start; /* 内容从上往下排 */
+            padding-top: 50px;
+        }
+
+        .cn-meaning {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .en-related {
+            font-size: 1rem;
+            color: var(--text-sub);
+            font-style: italic;
+            margin-bottom: 30px;
+            font-family: "Georgia", serif;
+        }
+
+        /* 知识点盒子 */
+        .theory-box {
+            background: #f2f2f7;
+            padding: 20px;
+            border-radius: 16px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .theory-item {
+            margin-bottom: 15px;
+        }
+        .theory-item:last-child { margin-bottom: 0; }
+
+        .theory-label {
+            font-size: 0.75rem;
+            color: #8e8e93;
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .theory-content {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        /* --- 控制按钮 --- */
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-prev { 
+            background: white; 
+            color: var(--text-main); 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05); 
+        }
+        
+        .btn-next { 
+            background: var(--primary); 
+            color: white; 
+            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3); 
+        }
+
+        .btn-shuffle { 
+            flex: 0 0 54px; 
+            background: #e5e5ea; 
+            font-size: 1.2rem; 
+        }
+
+        .btn:active { transform: scale(0.96); }
+
+        .progress {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            font-family: monospace;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-5px);}
+            60% {transform: translateY(-3px);}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>TOEIC 商务核心词</h1>
+        <p>点击卡片或按空格翻转</p>
+    </div>
+
+    <div class="scene">
+        <div class="card" id="card">
+            <div class="card__face card__face--front">
+                <span class="word-label">WORD</span>
+                <div class="english-word" id="wordDisplay">Loading...</div>
+                <div class="click-hint">👆 点击查看释义</div>
+            </div>
+
+            <div class="card__face card__face--back">
+                <div class="cn-meaning" id="cnDisplay"></div>
+                <div class="en-related" id="relatedDisplay"></div>
+                
+                <div class="theory-box">
+                    <div class="theory-item">
+                        <span class="theory-label">核心搭配 (Collocations)</span>
+                        <div class="theory-content" id="collocationDisplay"></div>
+                    </div>
+                    <div class="theory-item">
+                        <span class="theory-label">记忆/用法 (Notes)</span>
+                        <div class="theory-content" id="noteDisplay"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn btn-shuffle" onclick="shuffleCards()" title="打乱顺序">🎲</button>
+        <button class="btn btn-prev" onclick="changeCard(-1)">← 上一个</button>
+        <button class="btn btn-next" onclick="changeCard(1)">下一个 →</button>
+    </div>
+
+    <div class="progress" id="progress">1 / 32</div>
+
+    <script>
+        // 这里填入你的 32 个单词数据
+        // 格式：{ word: "单词", cn: "中文", related: "相关词", coll: "搭配", note: "记忆法" }
+        const rawData = [
+            { word: "Employee", cn: "[n.] 员工", related: "Employer / Employment", coll: "a full-time employee", note: "-ee是被动(打工), -er是主动(老板)" },
+            { word: "Provide", cn: "[v.] 提供", related: "供应", coll: "provide A with B\nprovide B for A", note: "注意介词 with 和 for 的区别" },
+            { word: "Conference", cn: "[n.] 会议", related: "Meeting / Discussion", coll: "press conference (发布会)\nattend a conference", note: "通常指正式的大型会议" },
+            { word: "Due", cn: "[adj.] 到期的", related: "Due to / Be due", coll: "due to rain (因为)\nbe due to arrive (预计)", note: "Due to = Because of" },
+            { word: "Attend", cn: "[v.] 参加", related: "Attend to (处理)", coll: "attend a meeting (参加)\nattend to a client (接待)", note: "Attend+宾语=参加; Attend to+宾语=照顾/处理" },
+            { word: "Account for", cn: "[phr.] 解释/占比", related: "-", coll: "account for the error (解释)\naccount for 30% (占比)", note: "意思完全不同，看上下文" },
+            { word: "Purchase", cn: "[v.] 购买", related: "Buy (更口语)", coll: "make a purchase\nproof of purchase (凭证)", note: "比 buy 更正式" },
+            { word: "Research", cn: "[n./v.] 研究", related: "R&D", coll: "market research\nconduct research", note: "通常作为不可数名词" },
+            { word: "Supply", cn: "[v.] 供应", related: "n. 补给品", coll: "office supplies (办公用品)\nin short supply (短缺)", note: "Supply A with B" },
+            { word: "Submit", cn: "[v.] 提交", related: "Hand in", coll: "submit a proposal\nsubmit a resume", note: "submit A to B" },
+            { word: "Facility", cn: "[n.] 设施/工厂", related: "-", coll: "sports facilities\nproduction facility", note: "托业常指具体的工厂或大楼" },
+            { word: "Notice", cn: "[n.] 通知/辞职信", related: "v. 注意到", coll: "until further notice\ngive two weeks' notice", note: "Notice作名词常考辞职通知" },
+            { word: "Available", cn: "[adj.] 有空的", related: "可获得的", coll: "available for purchase (可买)\navailable to meet (有人)", note: "人/物 都可以用" },
+            { word: "Representative", cn: "[n.] 代表", related: "Rep", coll: "sales representative\ncustomer service rep", note: "虽然是-tive结尾，但是是名词" },
+            { word: "Corporation", cn: "[n.] 大公司", related: "Corp.", coll: "multinational corporation", note: "法人企业" },
+            { word: "Charge", cn: "[n.] 费用/掌管", related: "v. 收费", coll: "in charge of (负责...)\nfree of charge (免费)", note: "In charge of 必考" },
+            { word: "Process", cn: "[n.] 流程", related: "v. 处理/加工", coll: "hiring process\nprocess an order", note: "processed food (加工食品)" },
+            { word: "Improve", cn: "[v.] 改善", related: "Improvement", coll: "improve productivity\nsignificantly improve", note: "提升业绩/效率" },
+            { word: "Prefer", cn: "[v.] 更喜欢", related: "Preference", coll: "prefer A to B (喜欢A胜过B)", note: "注意介词用 to" },
+            { word: "Inquire", cn: "[v.] 询问", related: "Enquire", coll: "inquire about\ninquire into (调查)", note: "Inquiry (名词)" },
+            { word: "Apply", cn: "[v.] 申请", related: "应用", coll: "apply for a job\napply to a company", note: "for+目的, to+对象" },
+            { word: "Management", cn: "[n.] 管理层", related: "The management", coll: "time management\nunder new management", note: "集合名词，可指一群领导" },
+            { word: "Supervisor", cn: "[n.] 主管", related: "Boss / Manager", coll: "immediate supervisor (直属)", note: "监督者" },
+            { word: "Deliver", cn: "[v.] 递送", related: "发表(演讲)", coll: "deliver a package\ndeliver a speech", note: "不仅送货，还能送'话'" },
+            { word: "Arrange", cn: "[v.] 安排", related: "Arrangement", coll: "arrange a meeting\narrange for transportation", note: "整理/筹备" },
+            { word: "Budget", cn: "[n.] 预算", related: "v. 编预算", coll: "on a tight budget\nover/under budget", note: "经常考 budget cut (削减预算)" },
+            { word: "Performance", cn: "[n.] 表现/业绩", related: "性能", coll: "performance appraisal (评估)\nhigh-performance", note: "工作表现" },
+            { word: "Consider", cn: "[v.] 考虑", related: "Considerable (巨大的)", coll: "consider doing (加ing)\nbe considered as", note: "Considerate 是'体贴的'" },
+            { word: "Recommend", cn: "[v.] 推荐", related: "Recommendation", coll: "recommend doing sth\nrecommend that...", note: "建议" },
+            { word: "Annual", cn: "[adj.] 每年的", related: "Annually", coll: "annual report\nannual conference", note: "年度的" },
+            { word: "Policy", cn: "[n.] 政策", related: "保单", coll: "company policy\nreturn policy", note: "保险单也叫 policy" },
+            { word: "Committee", cn: "[n.] 委员会", related: "-", coll: "safety committee\nform a committee", note: "集合名词" }
+        ];
+
+        let cards = [...rawData];
+        let currentIndex = 0;
+        let isFlipped = false;
+
+        const cardEl = document.getElementById('card');
+        const wordEl = document.getElementById('wordDisplay');
+        const cnEl = document.getElementById('cnDisplay');
+        const relatedEl = document.getElementById('relatedDisplay');
+        const collEl = document.getElementById('collocationDisplay');
+        const noteEl = document.getElementById('noteDisplay');
+        const progressEl = document.getElementById('progress');
+
+        function init() {
+            renderCard();
+        }
+
+        function renderCard() {
+            const item = cards[currentIndex];
+            wordEl.textContent = item.word;
+            cnEl.textContent = item.cn;
+            relatedEl.textContent = item.related;
+            // 允许换行显示搭配
+            collEl.innerHTML = item.coll.replace(/\n/g, '<br>');
+            noteEl.textContent = item.note;
+            
+            progressEl.textContent = `${currentIndex + 1} / ${cards.length}`;
+            
+            // 重置翻转
+            cardEl.classList.remove('is-flipped');
+            isFlipped = false;
+        }
+
+        // 点击翻转
+        cardEl.addEventListener('click', () => {
+            isFlipped = !isFlipped;
+            cardEl.classList.toggle('is-flipped');
+        });
+
+        // 切换卡片
+        function changeCard(dir) {
+            const nextIndex = currentIndex + dir;
+            if (nextIndex >= 0 && nextIndex < cards.length) {
+                currentIndex = nextIndex;
+                renderCard();
+            }
+        }
+
+        // 洗牌算法
+        function shuffleCards() {
+            for (let i = cards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [cards[i], cards[j]] = [cards[j], cards[i]];
+            }
+            currentIndex = 0;
+            renderCard();
+        }
+
+        // 键盘支持
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' || e.code === 'Enter') {
+                e.preventDefault(); // 防止空格滚动页面
+                cardEl.click();
+            } else if (e.code === 'ArrowRight') {
+                changeCard(1);
+            } else if (e.code === 'ArrowLeft') {
+                changeCard(-1);
+            }
+        });
+
+        init();
+    </script>
+</body>
+</html>
