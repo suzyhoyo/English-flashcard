@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>商务英语 32 词闪卡</title>
+<style>
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background-color: #f2f2f7;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+        margin: 0;
+    }
+
+    .flip-card {
+        background-color: transparent;
+        width: 300px;
+        height: 220px; /*稍微加高一点以容纳多行文字*/
+        perspective: 1000px;
+        margin: 15px;
+    }
+
+    .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        border-radius: 16px;
+    }
+
+    .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        border-radius: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    /* 正面样式 */
+    .flip-card-front {
+        background-color: #ffffff;
+        color: #1c1c1e;
+        border: 1px solid #d1d1d6;
+    }
+    
+    .word-title {
+        font-size: 26px;
+        font-weight: 700;
+        color: #007aff;
+    }
+
+    /* 背面样式 */
+    .flip-card-back {
+        background-color: #007aff;
+        color: white;
+        transform: rotateY(180deg);
+        font-size: 15px;
+        line-height: 1.5;
+        text-align: left;
+        align-items: flex-start; /* 文字左对齐 */
+        overflow-y: auto; /*如果文字太多可以滚动*/
+    }
+
+    .def { font-weight: bold; margin-bottom: 8px; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px; width: 100%;}
+    .note { font-size: 13px; opacity: 0.9; margin-top: 5px; }
+</style>
+</head>
+<body>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Employee</div></div>
+    <div class="flip-card-back">
+        <div class="def">[n.] 员工，受雇者</div>
+        <div>搭配: full-time employee (全职)</div>
+        <div class="note">记忆: -ee是被动(打工), -er是主动(老板)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Provide</div></div>
+    <div class="flip-card-back">
+        <div class="def">[v.] 提供，供应</div>
+        <div>★ provide A with B (给A提供B)</div>
+        <div>★ provide B for A (为A提供B)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Conference</div></div>
+    <div class="flip-card-back">
+        <div class="def">[n.] 会议，讨论会</div>
+        <div>搭配: press conference (发布会)</div>
+        <div>搭配: attend a conference (参会)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Due / Due to</div></div>
+    <div class="flip-card-back">
+        <div class="def">[adj.] 到期的; 预定的</div>
+        <div>Due to + n. = 因为</div>
+        <div>Be due to + v. = 预计做</div>
+        <div>Be due = 到期了</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Attend / To</div></div>
+    <div class="flip-card-back">
+        <div class="def">Attend [v.] 参加 (直接加宾语)</div>
+        <div class="def">Attend to [phr.] 处理; 照顾</div>
+        <div>例: attend to a client (接待客户)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Account for</div></div>
+    <div class="flip-card-back">
+        <div class="def">[phr.] 解释 / 占比</div>
+        <div>1. 解释原因 (account for error)</div>
+        <div>2. 占...比例 (account for 30%)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Purchase</div></div>
+    <div class="flip-card-back">
+        <div class="def">[v./n.] 购买 (=buy)</div>
+        <div>make a purchase (进行购买)</div>
+        <div>proof of purchase (购买凭证)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Research</div></div>
+    <div class="flip-card-back">
+        <div class="def">[n./v.] 研究，调查</div>
+        <div>market research (市场调研)</div>
+        <div>R&D (Research and Development)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Supply</div></div>
+    <div class="flip-card-back">
+        <div class="def">[v.] 供应 [n.] 补给品</div>
+        <div>supply A with B / supply B to A</div>
+        <div>office supplies (办公用品)</div>
+        <div>in short supply (短缺)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Submit</div></div>
+    <div class="flip-card-back">
+        <div class="def">[v.] 提交，呈递</div>
+        <div>submit a proposal (提交提案)</div>
+        <div>submit a resume (提交简历)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Facility</div></div>
+    <div class="flip-card-back">
+        <div class="def">[n.] 设施; 工厂; 场所</div>
+        <div>sports facilities (体育设施)</div>
+        <div>production facility (生产工厂)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Notice</div></div>
+    <div class="flip-card-back">
+        <div class="def">[n.] 通知; 辞职信</div>
+        <div>until further notice (另行通知前)</div>
+        <div>give two weeks' notice (提离职)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Available</div></div>
+    <div class="flip-card-back">
+        <div class="def">[adj.] 可获得的; 有空的</div>
+        <div>物: available for purchase (可买)</div>
+        <div>人: available to meet (有空见面)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Representative</div></div>
+    <div class="flip-card-back">
+        <div class="def">[n.] 代表 (Rep)</div>
+        <div>sales representative (销售代表)</div>
+        <div>customer service rep (客服)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Corporation</div></div>
+    <div class="flip-card-back">
+        <div class="def">[n.] 大公司，企业</div>
+        <div>multinational corporation (跨国)</div>
+        <div>缩写: Corp.</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Charge</div></div>
+    <div class="flip-card-back">
+        <div class="def">[n.] 费用; 掌管 [v.] 收费</div>
+        <div>★ in charge of (负责/主管)</div>
+        <div>free of charge (免费)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Process</div></div>
+    <div class="flip-card-back">
+        <div class="def">[n.] 流程 [v.] 处理</div>
+        <div>hiring process (招聘流程)</div>
+        <div>process an order (处理订单)</div>
+        <div>processed food (加工食品)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Improve</div></div>
+    <div class="flip-card-back">
+        <div class="def">[v.] 改善，提升</div>
+        <div>improve productivity (提高生产力)</div>
+        <div>significantly improve (显著改善)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Prefer</div></div>
+    <div class="flip-card-back">
+        <div class="def">[v.] 更喜欢，宁愿</div>
+        <div>prefer A to B (喜欢A胜过B)</div>
+        <div>preference [n.] 偏好</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Inquire</div></div>
+    <div class="flip-card-back">
+        <div class="def">[v.] 询问，打听</div>
+        <div>inquire about (询问关于...)</div>
+        <div>inquiry [n.] 询价/询问</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Apply</div></div>
+    <div class="flip-card-back">
+        <div class="def">[v.] 申请; 应用</div>
+        <div>apply for a job (申请工作)</div>
+        <div>apply to a company (向公司申请)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Management</div></div>
+    <div class="flip-card-back">
+        <div class="def">[n.] 管理; 管理层</div>
+        <div>The management (管理层)</div>
+        <div>time management (时间管理)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Supervisor</div></div>
+    <div class="flip-card-back">
+        <div class="def">[n.] 主管，监督者</div>
+        <div>immediate supervisor (直属主管)</div>
+        <div>同义: boss, manager</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Deliver</div></div>
+    <div class="flip-card-back">
+        <div class="def">[v.] 递送; 发表(演讲)</div>
+        <div>deliver a package (送包裹)</div>
+        <div>deliver a speech (发表演讲)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Arrange</div></div>
+    <div class="flip-card-back">
+        <div class="def">[v.] 安排，整理</div>
+        <div>arrange a meeting (安排会议)</div>
+        <div>arrangement [n.] 安排</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Budget</div></div>
+    <div class="flip-card-back">
+        <div class="def">[n.] 预算</div>
+        <div>on a tight budget (预算紧张)</div>
+        <div>over/under budget (超支/省钱)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Performance</div></div>
+    <div class="flip-card-back">
+        <div class="def">[n.] 表现; 业绩; 性能</div>
+        <div>performance appraisal (绩效评估)</div>
+        <div>high-performance (高性能)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Consider</div></div>
+    <div class="flip-card-back">
+        <div class="def">[v.] 考虑; 认为</div>
+        <div>consider doing (考虑做...)</div>
+        <div>considerable [adj.] 相当大的</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Recommend</div></div>
+    <div class="flip-card-back">
+        <div class="def">[v.] 推荐，建议</div>
+        <div>recommend doing sth</div>
+        <div>recommendation [n.] 推荐信</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Annual</div></div>
+    <div class="flip-card-back">
+        <div class="def">[adj.] 每年的，年度的</div>
+        <div>annual report (年度报告)</div>
+        <div>annual conference (年会)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Policy</div></div>
+    <div class="flip-card-back">
+        <div class="def">[n.] 政策; 保险单</div>
+        <div>company policy (公司政策)</div>
+        <div>return policy (退货政策)</div>
+    </div>
+</div></div>
+
+<div class="flip-card"><div class="flip-card-inner">
+    <div class="flip-card-front"><div class="word-title">Committee</div></div>
+    <div class="flip-card-back">
+        <div class="def">[n.] 委员会</div>
+        <div>safety committee (安全委员会)</div>
+        <div>form a committee (组建)</div>
+    </div>
+</div></div>
+
+</body>
+</html>
