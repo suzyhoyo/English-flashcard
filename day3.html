@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Day 3: 商务规则与流程</title>
+    <title>Day 3: 商务规则 (完美版)</title>
     <style>
         :root {
-            --primary: #34c759; /* Day 3 主题色：绿色 */
+            --primary: #34c759; /* 绿色主题 */
             --bg: #f2f2f7;
             --card-bg: #ffffff;
             --text-main: #1c1c1e;
@@ -24,7 +24,7 @@
             margin: 0;
             padding: 20px;
             -webkit-tap-highlight-color: transparent;
-            overflow: hidden; /* 防止滑动回弹 */
+            overflow: hidden;
         }
 
         /* 顶部导航 */
@@ -33,7 +33,6 @@
             display: flex; justify-content: space-between; align-items: center;
         }
         .home-btn { text-decoration: none; font-size: 1.2rem; background: #e5e5ea; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        
         .progress-bar { flex-grow: 1; height: 6px; background: #e5e5ea; border-radius: 3px; margin: 0 15px; overflow: hidden; }
         .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.3s ease; }
         .counter { font-size: 0.9rem; color: var(--text-sub); font-family: monospace; font-weight: bold; }
@@ -42,7 +41,7 @@
         .scene {
             width: 100%;
             max-width: 360px;
-            height: 540px; /* 为了容纳更多笔记，稍微加高 */
+            height: 540px;
             perspective: 1200px;
             position: relative;
         }
@@ -60,28 +59,67 @@
             position: absolute; width: 100%; height: 100%;
             backface-visibility: hidden; -webkit-backface-visibility: hidden;
             border-radius: 24px; padding: 30px; box-sizing: border-box;
-            background: var(--card-bg); display: flex; flex-direction: column; align-items: center;
-            text-align: center; border: 1px solid rgba(0,0,0,0.05);
+            background: var(--card-bg); display: flex; flex-direction: column; 
+            align-items: center; text-align: center; border: 1px solid rgba(0,0,0,0.05);
         }
 
-        /* 正面 */
-        .front { justify-content: center; background: linear-gradient(145deg, #ffffff 0%, #f2fff6 100%); }
-        .label { font-size: 0.75rem; color: var(--primary); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; opacity: 0.7; }
-        .english-word { font-size: 2.8rem; font-weight: 800; color: var(--text-main); margin-bottom: 30px; line-height: 1.1; }
-        .speaker { font-size: 1.5rem; padding: 15px; background: rgba(52, 199, 89, 0.1); border-radius: 50%; cursor: pointer; color: var(--primary); transition: 0.2s; }
-        .speaker:active { transform: scale(0.9); background: rgba(52, 199, 89, 0.2); }
-        .hint { margin-top: auto; font-size: 0.8rem; color: #c7c7cc; animation: bounce 2s infinite; }
+        /* --- 正面样式 (极简) --- */
+        .front { 
+            justify-content: center;
+            background: linear-gradient(145deg, #ffffff 0%, #f9fffb 100%);
+        }
+        .english-word { 
+            font-size: 3.2rem; font-weight: 800; color: var(--text-main); 
+            line-height: 1.1; margin-bottom: 25px;
+        }
+        .speaker { 
+            font-size: 1.4rem; padding: 12px; background: #f2f2f7; border-radius: 50%; 
+            cursor: pointer; color: var(--primary); transition: 0.2s; 
+        }
+        .speaker:active { transform: scale(0.9); background: #e5e5ea; }
+        .hint { 
+            position: absolute; bottom: 30px; font-size: 0.75rem; color: #d1d1d6; 
+            letter-spacing: 1px; text-transform: uppercase;
+        }
 
-        /* 背面 */
-        .back { transform: rotateY(180deg); padding-top: 40px; justify-content: flex-start; }
-        .cn-meaning { font-size: 1.6rem; font-weight: bold; color: var(--primary); margin-bottom: 25px; }
+        /* --- 背面样式 (重点修复) --- */
+        .back { 
+            transform: rotateY(180deg); 
+            justify-content: center; /* 垂直居中 */
+            background: #fff;
+        }
+
+        /* 中文大字 */
+        .cn-meaning { 
+            font-size: 2rem; 
+            font-weight: 800; 
+            color: var(--primary); 
+            margin-bottom: 20px; 
+            line-height: 1.3;
+        }
         
-        .note-box {
-            background: #f2f2f7; width: 100%; padding: 15px; border-radius: 16px;
-            text-align: left; flex-grow: 1; display: flex; flex-direction: column; justify-content: center;
+        /* 分割线 */
+        .divider {
+            width: 40px;
+            height: 4px;
+            background: #f2f2f7;
+            border-radius: 2px;
+            margin-bottom: 20px;
         }
-        .note-title { font-size: 0.7rem; color: #8e8e93; font-weight: 700; text-transform: uppercase; margin-bottom: 6px; display: block; }
-        .note-content { font-size: 0.95rem; line-height: 1.5; color: #333; white-space: pre-wrap; font-weight: 500; }
+
+        /* 笔记区域 (去掉背景框，更干净) */
+        .note-content { 
+            font-size: 1.05rem; 
+            line-height: 1.6; 
+            color: #444; 
+            white-space: pre-wrap; /* 保留换行 */
+            font-weight: 500;
+            width: 100%;
+            text-align: left; /* 笔记左对齐更易读 */
+            /* 如果内容太长，允许内部滚动，不切字 */
+            max-height: 260px; 
+            overflow-y: auto;
+        }
 
         /* 底部按钮 */
         .controls { width: 100%; max-width: 360px; display: flex; gap: 12px; margin-top: 25px; }
@@ -90,7 +128,6 @@
         .btn-next { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(52, 199, 89, 0.4); }
         .btn:active { transform: scale(0.96); }
 
-        @keyframes bounce { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-5px);} }
     </style>
 </head>
 <body>
@@ -104,30 +141,27 @@
     <div class="scene">
         <div class="card" id="card">
             <div class="face front">
-                <div class="label">BUSINESS WORD</div>
                 <div class="english-word" id="word">Loading...</div>
                 <div class="speaker" onclick="speak(event)">🔊</div>
-                <div class="hint">点击翻转 / Space</div>
+                <div class="hint">Tap to flip</div>
             </div>
+            
             <div class="face back">
                 <div class="cn-meaning" id="cn"></div>
-                <div class="note-box">
-                    <span class="note-title">MEMO / COLLOCATIONS</span>
-                    <div class="note-content" id="note"></div>
-                </div>
+                <div class="divider"></div>
+                <div class="note-content" id="note"></div>
             </div>
         </div>
     </div>
 
     <div class="controls">
-        <button class="btn btn-know" onclick="markMastered()">✅ 已掌握 (斩)</button>
+        <button class="btn btn-know" onclick="markMastered()">✅ 斩 (已会)</button>
         <button class="btn btn-next" onclick="nextCard()">Next ➜</button>
     </div>
 
     <script>
-        // --- Day 3 数据 (含辨析) ---
+        // --- Day 3 完整数据 ---
         const rawData = [
-            // 正常词汇
             { w: "Property", cn: "财产；房产", note: "Intellectual Property (IP 知识产权)\nprivate property (私有财产)" },
             { w: "Consumer", cn: "消费者", note: "consumer confidence (信心)\nconsumer goods (消费品)" },
             { w: "Raise", cn: "增加；提出", note: "raise a question (提问)\nget a raise (加薪)\n⚠️ Raise是及物(Raise hand), Rise是不及物" },
@@ -160,8 +194,6 @@
             { w: "Regard", cn: "看待；问候", note: "with regard to / regarding (关于 - 邮件必用)\nGive my regards to... (代为问候)" },
             { w: "Select", cn: "v.选择 adj.精选的", note: "select a winner\na select group (精选群体)" },
             { w: "Identification", cn: "身份证明 (ID)", note: "photo identification (带照片证件)\npresent identification (出示证件)" },
-            
-            // Teacher's Special (辨析题)
             { w: "Fee vs. Fare", cn: "费用辨析", note: "Fee: 专业服务/入场 (Tuition fee, Entrance fee)\nFare: 交通费 (Bus fare, Airfare)" },
             { w: "Fine vs. Charge", cn: "费用辨析 II", note: "Fine: 罚款 (Parking fine)\nCharge: 通用收费 (Service charge)" },
             { w: "Connect vs Contact", cn: "联系辨析", note: "Connect: 物理连接/转接 (Connect to...)\nContact: 直接联系人 (及物动词, 无with!)" },
@@ -175,7 +207,7 @@
 
         function render() {
             if(cards.length === 0) {
-                document.querySelector('.scene').innerHTML = "<div style='text-align:center; margin-top:50%; color:#aaa;'>🎉 All Mastered!</div>";
+                document.querySelector('.scene').innerHTML = "<div style='text-align:center; margin-top:50%; color:#aaa; font-weight:bold;'>🎉 ALL CLEAR!</div>";
                 return;
             }
             
@@ -210,7 +242,7 @@
 
         function speak(e) {
             e.stopPropagation();
-            const text = cards[idx].w.replace(/ vs\.? /i, " versus "); // 优化辨析词的发音
+            const text = cards[idx].w.replace(/ vs\.? /i, " versus ");
             const u = new SpeechSynthesisUtterance(text);
             u.lang = 'en-US';
             u.rate = 0.9;
