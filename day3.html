@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Day 3: 商务规则 (毛玻璃版)</title>
+    <title>Day 3: 商务规则 (最终版)</title>
     <style>
         :root {
             --primary: #34c759; /* 绿色主题 */
             --text-main: #1c1c1e;
             --text-sub: #8e8e93;
-            /* 新增：毛玻璃背景色 */
+            /* 毛玻璃背景设置 */
             --glass-bg: rgba(255, 255, 255, 0.65);
             --glass-border: rgba(255, 255, 255, 0.2);
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Helvetica, Arial, sans-serif;
-            /* 背景换成柔和的渐变，增强毛玻璃效果 */
-            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); /* 示例暖色渐变，可自行修改 */
+            /* 柔和渐变背景 */
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -32,13 +32,13 @@
         /* --- 毛玻璃通用样式 --- */
         .glass-panel {
             background: var(--glass-bg);
-            backdrop-filter: blur(20px); /* 核心模糊效果 */
-            -webkit-backdrop-filter: blur(20px); /* 兼容Safari */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
         }
 
-        /* 顶部导航 (应用毛玻璃) */
+        /* 顶部导航 */
         .header {
             width: 100%; max-width: 360px; margin-bottom: 25px; padding: 10px 15px; border-radius: 20px;
             display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;
@@ -55,7 +55,7 @@
             height: 520px;
             perspective: 1200px;
             position: relative;
-            z-index: 10; /* 保证卡片在最上层 */
+            z-index: 10;
         }
 
         .card {
@@ -63,206 +63,6 @@
             transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
             transform-style: preserve-3d;
             border-radius: 24px;
-            /* 卡片本身的投影 */
             box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
         }
-        .card.is-flipped { transform: rotateY(180deg); }
-
-        .face {
-            position: absolute; width: 100%; height: 100%;
-            backface-visibility: hidden; -webkit-backface-visibility: hidden;
-            border-radius: 24px; padding: 30px; box-sizing: border-box;
-            background: #ffffff; /* 卡片保持纯白，对比更鲜明 */
-            display: flex; flex-direction: column; 
-            align-items: center; text-align: center;
-        }
-
-        /* --- 正面 --- */
-        .front { 
-            justify-content: center;
-            background: linear-gradient(145deg, #ffffff 0%, #f9fffb 100%);
-        }
-        .english-word { 
-            font-size: 3.2rem; font-weight: 800; color: var(--text-main); 
-            line-height: 1.1; margin-bottom: 25px;
-        }
-        .speaker { 
-            font-size: 1.4rem; padding: 12px; background: #f2f2f7; border-radius: 50%; 
-            cursor: pointer; color: var(--primary); transition: 0.2s; 
-        }
-        .speaker:active { transform: scale(0.9); background: #e5e5ea; }
-        .hint { 
-            position: absolute; bottom: 30px; font-size: 0.75rem; color: #d1d1d6; 
-            letter-spacing: 1px; text-transform: uppercase;
-        }
-
-        /* --- 背面 --- */
-        .back { 
-            transform: rotateY(180deg); 
-            justify-content: center; 
-            background: #fff;
-        }
-        .cn-meaning { 
-            font-size: 2rem; font-weight: 800; color: var(--primary); 
-            margin-bottom: 20px; line-height: 1.3;
-        }
-        .divider { width: 40px; height: 4px; background: #f2f2f7; border-radius: 2px; margin-bottom: 20px; }
-        .note-content { 
-            font-size: 1.05rem; line-height: 1.6; color: #444; white-space: pre-wrap;
-            font-weight: 500; width: 100%; text-align: left; max-height: 260px; overflow-y: auto;
-        }
-
-        /* 底部按钮 (应用毛玻璃) */
-        .controls {
-            width: 100%; max-width: 360px; display: flex; gap: 10px; margin-top: 25px;
-            padding: 10px; border-radius: 22px; box-sizing: border-box;
-        }
-        .btn {
-            flex: 1; padding: 14px 10px; border: none; border-radius: 16px;
-            font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: 0.1s;
-            display: flex; align-items: center; justify-content: center;
-        }
-        /* 按钮样式区分 */
-        .btn-nav { background: rgba(255,255,255,0.5); color: var(--text-main); } /* 上下翻页 */
-        .btn-master { background: rgba(255, 59, 48, 0.15); color: #ff3b30; } /* 斩 - 红色提示 */
-        
-        .btn:active { transform: scale(0.96); background: rgba(0,0,0,0.1); }
-
-    </style>
-</head>
-<body>
-
-    <div class="header glass-panel">
-        <a href="index.html" class="home-btn">🏠</a>
-        <div class="progress-bar"><div class="progress-fill" id="fill"></div></div>
-        <div class="counter" id="counter">1/36</div>
-    </div>
-
-    <div class="scene">
-        <div class="card" id="card">
-            <div class="face front">
-                <div class="english-word" id="word">Loading...</div>
-                <div class="speaker" onclick="speak(event)">🔊</div>
-                <div class="hint">Tap to flip</div>
-            </div>
-            
-            <div class="face back">
-                <div class="cn-meaning" id="cn"></div>
-                <div class="divider"></div>
-                <div class="note-content" id="note"></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="controls glass-panel">
-        <button class="btn btn-nav" onclick="prevCard()">← 上个</button>
-        <button class="btn btn-master" onclick="markMastered()">✅ 斩</button>
-        <button class="btn btn-nav" onclick="nextCard()">下个 ➜</button>
-    </div>
-
-    <script>
-        // --- Day 3 完整数据 ---
-        const rawData = [
-            { w: "Property", cn: "财产；房产", note: "Intellectual Property (IP 知识产权)\nprivate property (私有财产)" },
-            { w: "Consumer", cn: "消费者", note: "consumer confidence (信心)\nconsumer goods (消费品)" },
-            { w: "Raise", cn: "增加；提出", note: "raise a question (提问)\nget a raise (加薪)\n⚠️ Raise是及物(Raise hand), Rise是不及物" },
-            { w: "Indicate", cn: "指出；表明", note: "indicate that... (表明)\nIndicator [n.] 指标" },
-            { w: "Permit", cn: "v.允许 / n.许可证", note: "work permit (工作证)\n⚠️ 重音不同: v. per'mit / n. 'permit" },
-            { w: "Rent", cn: "租用；租金", note: "for rent (出租中)\npay the rent (付房租)" },
-            { w: "Shipment", cn: "货物；装运", note: "delay in shipment (装运延误)\ntrack a shipment (追踪货物)" },
-            { w: "Distribute", cn: "分发；分销", note: "distribute A to B\nDistributor [n.] 经销商" },
-            { w: "Stock", cn: "库存；股票", note: "in stock (有货) / out of stock (缺货)\nstock market (股市)" },
-            { w: "Regulation", cn: "规定，条例", note: "safety regulations (安全规定)\ncomply with regulations (遵守)" },
-            { w: "Exhibit", cn: "展示；展品", note: "exhibit a painting\nExhibition [n.] 展览会" },
-            { w: "Estimate", cn: "v.估计 n.估价单", note: "provide an estimate (提供估价单)\n装修/维修场景常考" },
-            { w: "Quarter", cn: "季度；1/4", note: "first quarter (Q1)\nquarterly report (季度报告)" },
-            { w: "Necessary", cn: "必要的", note: "if necessary (如有必要)\ndeem it necessary (认为有必要)" },
-            { w: "Encourage", cn: "鼓励；促进", note: "encourage sb to do sth\n(鼓励某人做某事)" },
-            { w: "Resume", cn: "n.简历 v.恢复", note: "submit a resume (交简历)\nresume negotiations (恢复谈判)\n⚠️ 发音不同！" },
-            { w: "Responsible", cn: "负责的", note: "be responsible for (对...负责)\nhold sb responsible (追责)" },
-            { w: "Invoice", cn: "发票；请款单", note: "issue an invoice (开票)\n⚠️ Invoice=付钱前的账单\nReceipt=付钱后的收据" },
-            { w: "Standard", cn: "标准", note: "safety standards (安全标准)\nmeet the standards (符合标准)" },
-            { w: "Legal", cn: "法律的", note: "legal department (法务部)\ntake legal action (起诉)" },
-            { w: "Confirm", cn: "确认", note: "confirm a reservation (确认预订)\nconfirm the details" },
-            { w: "Extend", cn: "延长；给予", note: "extend the deadline (延期)\nextend an invitation (发出邀请 - 高级!)" },
-            { w: "Reduce", cn: "减少；降低", note: "reduce costs (降本)\nreduce the price" },
-            { w: "Individual", cn: "个人；个别的", note: "individual performance\n(个人表现)" },
-            { w: "Limit", cn: "限制；限度", note: "speed limit (速限)\nwithin the limit (在限度内)" },
-            { w: "Appreciate", cn: "感激；欣赏；增值", note: "appreciate your help (感激)\nappreciate in value (增值 - 房产考点)" },
-            { w: "Deposit", cn: "押金；存款", note: "security deposit (押金)\nmake a deposit (存款)" },
-            { w: "Revise", cn: "修订，修改", note: "revise the report (改报告)\nrevised edition (修订版)" },
-            { w: "Notify", cn: "通知 (正式)", note: "notify sb of sth\n同义词: Inform" },
-            { w: "Regard", cn: "看待；问候", note: "with regard to / regarding (关于 - 邮件必用)\nGive my regards to... (代为问候)" },
-            { w: "Select", cn: "v.选择 adj.精选的", note: "select a winner\na select group (精选群体)" },
-            { w: "Identification", cn: "身份证明 (ID)", note: "photo identification (带照片证件)\npresent identification (出示证件)" },
-            { w: "Fee vs. Fare", cn: "费用辨析", note: "Fee: 专业服务/入场 (Tuition fee, Entrance fee)\nFare: 交通费 (Bus fare, Airfare)" },
-            { w: "Fine vs. Charge", cn: "费用辨析 II", note: "Fine: 罚款 (Parking fine)\nCharge: 通用收费 (Service charge)" },
-            { w: "Connect vs Contact", cn: "联系辨析", note: "Connect: 物理连接/转接 (Connect to...)\nContact: 直接联系人 (及物动词, 无with!)" },
-            { w: "Broaden vs Multiply", cn: "扩大辨析", note: "Broaden: 抽象范围/眼界 (Broaden horizons)\nMultiply: 数量倍增 (Profits multiplied)" }
-        ];
-
-        let cards = [...rawData];
-        let idx = 0;
-        const cardEl = document.getElementById('card');
-
-        function render() {
-            if(cards.length === 0) {
-                document.querySelector('.scene').innerHTML = "<div style='text-align:center; margin-top:50%; color:#fff; font-weight:bold; text-shadow:0 2px 4px rgba(0,0,0,0.2);'>🎉 ALL CLEAR!</div>";
-                return;
-            }
-            
-            const item = cards[idx];
-            document.getElementById('word').innerText = item.w;
-            document.getElementById('cn').innerText = item.cn;
-            document.getElementById('note').innerText = item.note;
-            
-            // 进度条
-            document.getElementById('counter').innerText = (idx + 1) + " / " + cards.length;
-            document.getElementById('fill').style.width = ((idx + 1) / cards.length * 100) + "%";
-
-            cardEl.classList.remove('is-flipped');
-        }
-
-        cardEl.addEventListener('click', () => {
-            cardEl.classList.toggle('is-flipped');
-        });
-
-        // --- 新增：上一个 ---
-        function prevCard() {
-            // 如果当前是第一个(0)，就跳到最后一个；否则减1
-            idx = (idx - 1 + cards.length) % cards.length;
-            render();
-        }
-
-        // --- 下一个 ---
-        function nextCard() {
-            idx = (idx + 1) % cards.length;
-            render();
-        }
-
-        function markMastered() {
-            cards.splice(idx, 1);
-            if(idx >= cards.length) idx = 0;
-            render();
-        }
-
-        function speak(e) {
-            e.stopPropagation();
-            const text = cards[idx].w.replace(/ vs\.? /i, " versus ");
-            const u = new SpeechSynthesisUtterance(text);
-            u.lang = 'en-US';
-            u.rate = 0.9;
-            speechSynthesis.speak(u);
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if(e.code === 'Space') { e.preventDefault(); cardEl.click(); }
-            if(e.code === 'ArrowRight') nextCard();
-            // 新增：左键支持
-            if(e.code === 'ArrowLeft') prevCard();
-        });
-
-        render();
-    </script>
-</body>
-</html>
+        .card.is-flipped
