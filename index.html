@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Suzy's Vocabulary</title>
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#f2f2f7">
+    <link rel="apple-touch-icon" href="https://img.icons8.com/color/120/abc.png"> <style>
+        :root {
+            --bg: #f2f2f7;
+            --card-bg: #ffffff;
+            --text-main: #1c1c1e;
+            --text-sub: #8e8e93;
+            --blue: #007aff;
+            --purple: #5856d6;
+            --green: #34c759;
+            --orange: #ff9500;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 20px;
+            padding-top: 60px; /* 留出状态栏空间 */
+            color: var(--text-main);
+            /* 防止iOS回弹效果，更像原生App */
+            overscroll-behavior-y: none; 
+        }
+
+        /* 顶部欢迎区 */
+        .header { margin-bottom: 30px; }
+        .header h1 { font-size: 34px; font-weight: 800; margin: 0 0 5px 0; letter-spacing: -0.5px; }
+        .header p { color: var(--text-sub); font-size: 17px; margin: 0; }
+        .date-badge { 
+            display: inline-block; background: #e5e5ea; color: var(--text-sub); 
+            padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; text-transform: uppercase; margin-bottom: 10px;
+        }
+
+        /* 课程网格 */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr; /* 手机上一列 */
+            gap: 16px;
+            padding-bottom: 40px;
+        }
+
+        /* 卡片样式 */
+        .course-card {
+            background: var(--card-bg);
+            border-radius: 22px;
+            padding: 24px;
+            text-decoration: none;
+            color: var(--text-main);
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .course-card:active { transform: scale(0.97); background: #f9f9f9; }
+
+        .card-left { display: flex; flex-direction: column; gap: 8px; }
+        
+        .tag {
+            font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+            color: white; padding: 4px 8px; border-radius: 6px; align-self: flex-start;
+        }
+        .tag-blue { background: var(--blue); box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3); }
+        .tag-purple { background: var(--purple); box-shadow: 0 2px 8px rgba(88, 86, 214, 0.3); }
+        .tag-gray { background: #d1d1d6; }
+
+        .title { font-size: 20px; font-weight: 700; }
+        .subtitle { font-size: 14px; color: var(--text-sub); }
+
+        .icon-arrow {
+            width: 30px; height: 30px; background: #f2f2f7; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; color: #c7c7cc; font-weight: bold;
+        }
+
+        /* 底部版权 */
+        .footer { text-align: center; color: #c7c7cc; font-size: 12px; margin-top: 20px; }
+
+        /* 适配平板/电脑 */
+        @media (min-width: 600px) {
+            .grid { grid-template-columns: repeat(2, 1fr); }
+            body { max-width: 800px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <span class="date-badge">TODAY</span>
+        <h1>Welcome Back, Suzy</h1>
+        <p>准备好开始今天的挑战了吗？</p>
+    </div>
+
+    <div class="grid">
+        
+        <a href="day1.html" class="course-card">
+            <div class="card-left">
+                <span class="tag tag-blue">DAY 1</span>
+                <span class="title">商务英语基础</span>
+                <span class="subtitle">32 Words • 核心词汇</span>
+            </div>
+            <div class="icon-arrow">➜</div>
+        </a>
+
+        <a href="day2.html" class="course-card">
+            <div class="card-left">
+                <span class="tag tag-purple">DAY 2</span>
+                <span class="title">进阶职场表达</span>
+                <span class="subtitle">32 Words • 会议与谈判</span>
+            </div>
+            <div class="icon-arrow">➜</div>
+        </a>
+
+        <a href="day3.html" class="course-card">
+            <div class="card-left">
+                <span class="tag tag-green" style="background:var(--green)">DAY 3</span>
+                <span class="title">高频短语动词</span>
+                <span class="subtitle">32 Words • 听力难点</span>
+            </div>
+            <div class="icon-arrow">➜</div>
+        </a>
+
+        <div class="course-card" style="opacity: 0.6; filter: grayscale(1);">
+            <div class="card-left">
+                <span class="tag tag-gray">LOCKED</span>
+                <span class="title">Day 4 - Coming Soon</span>
+                <span class="subtitle">待解锁...</span>
+            </div>
+            <div class="icon-arrow">🔒</div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        Designed for Suzy • GitHub Pages
+    </div>
+
+</body>
+</html>
