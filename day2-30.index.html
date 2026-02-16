@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 2: 商务英语核心词汇</title>
+    <style>
+        :root {
+            --primary: #5856d6; /* Day 2 换个颜色：深紫色 */
+            --bg: #f2f2f7;
+            --card-bg: #ffffff;
+            --text-main: #1c1c1e;
+            --text-sub: #8e8e93;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .header { text-align: center; margin-bottom: 20px; }
+        .header h1 { color: var(--text-main); font-size: 1.5rem; margin: 0; font-weight: 800; }
+        .header p { color: var(--text-sub); font-size: 0.9rem; margin-top: 5px; }
+        
+        /* 顶部导航 */
+        .nav-link { 
+            display: inline-block; margin-bottom: 10px; color: var(--primary); 
+            text-decoration: none; font-weight: bold; font-size: 0.9rem;
+        }
+
+        /* 3D 舞台 */
+        .scene {
+            width: 100%;
+            max-width: 360px;
+            height: 520px; /* 内容较多，稍微加高一点 */
+            perspective: 1200px;
+            cursor: pointer;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+            border-radius: 24px;
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.15);
+        }
+
+        .card.is-flipped { transform: rotateY(180deg); }
+
+        .card__face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--card-bg);
+            border-radius: 24px;
+            padding: 25px;
+            box-sizing: border-box;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* 正面样式 */
+        .card__face--front { background: linear-gradient(145deg, #ffffff 0%, #f0f5ff 100%); }
+        
+        .word-label {
+            font-size: 0.8rem; letter-spacing: 2px; color: var(--primary);
+            margin-bottom: 30px; font-weight: 700; opacity: 0.6; text-transform: uppercase;
+        }
+
+        .english-word {
+            font-size: 2.6rem; font-weight: 800; color: var(--text-main);
+            line-height: 1.2; margin-bottom: 40px; word-break: break-word;
+        }
+
+        .click-hint {
+            position: absolute; bottom: 30px; font-size: 0.8rem; color: #aeaeb2;
+            animation: bounce 2s infinite;
+        }
+
+        /* 背面样式 */
+        .card__face--back {
+            transform: rotateY(180deg);
+            background-color: #fff;
+            justify-content: flex-start;
+            padding-top: 40px;
+        }
+
+        .cn-meaning { font-size: 1.5rem; font-weight: bold; color: var(--primary); margin-bottom: 5px; }
+        .en-related { font-size: 0.95rem; color: var(--text-sub); font-style: italic; margin-bottom: 20px; }
+
+        .theory-box {
+            background: #f2f2f7; padding: 15px; border-radius: 16px; width: 100%; text-align: left;
+            flex-grow: 1; display: flex; flex-direction: column; justify-content: center;
+        }
+        
+        .theory-item { margin-bottom: 10px; }
+        .theory-item:last-child { margin-bottom: 0; }
+        .theory-label { font-size: 0.7rem; color: #8e8e93; display: block; margin-bottom: 2px; font-weight: 600; text-transform: uppercase; }
+        .theory-content { font-size: 0.9rem; font-weight: 500; color: var(--text-main); line-height: 1.4; white-space: pre-wrap; }
+
+        /* 按钮区 */
+        .controls { display: flex; gap: 10px; margin-top: 25px; width: 100%; max-width: 360px; }
+        .btn {
+            flex: 1; padding: 14px; border: none; border-radius: 14px;
+            font-size: 1rem; font-weight: 600; cursor: pointer;
+            transition: transform 0.1s; display: flex; align-items: center; justify-content: center;
+        }
+        .btn-prev { background: white; color: var(--text-main); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .btn-next { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(88, 86, 214, 0.3); }
+        .btn-shuffle { flex: 0 0 50px; background: #e5e5ea; font-size: 1.2rem; }
+        .btn:active { transform: scale(0.96); }
+
+        .progress { margin-top: 15px; font-size: 0.85rem; color: var(--text-sub); font-family: monospace; }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-5px);}
+            60% {transform: translateY(-3px);}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="index.html" class="nav-link">🏠 回首页</a>
+        <h1>Day 2 核心词汇</h1>
+        <p>32 Words Challenge</p>
+    </div>
+
+    <div class="scene">
+        <div class="card" id="card">
+            <div class="card__face card__face--front">
+                <span class="word-label">Word</span>
+                <div class="english-word" id="wordDisplay">Loading...</div>
+                <div class="click-hint">👆 点击翻转 / Space</div>
+            </div>
+
+            <div class="card__face card__face--back">
+                <div class="cn-meaning" id="cnDisplay"></div>
+                <div class="en-related" id="relatedDisplay"></div>
+                
+                <div class="theory-box">
+                    <div class="theory-item">
+                        <span class="theory-label">核心搭配</span>
+                        <div class="theory-content" id="collocationDisplay"></div>
+                    </div>
+                    <div class="theory-item">
+                        <span class="theory-label">记忆笔记</span>
+                        <div class="theory-content" id="noteDisplay"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn btn-shuffle" onclick="shuffleCards()" title="打乱顺序">🎲</button>
+        <button class="btn btn-prev" onclick="changeCard(-1)">← Prev</button>
+        <button class="btn btn-next" onclick="changeCard(1)">Next →</button>
+    </div>
+
+    <div class="progress" id="progress">1 / 32</div>
+
+    <script>
+        // --- Day 2 数据 ---
+        const rawData = [
+            { w: "Session", cn: "[n.] 会议；时段", rel: "Training / Q&A", col: "training session (培训)\nQ&A session (问答)", note: "brainstorming session (头脑风暴)" },
+            { w: "Manufacture", cn: "[v.] 制造，加工", rel: "Manufacturer", col: "manufacture goods (制造商品)", note: "衍生词 Manufacturer [n.] 制造商" },
+            { w: "Accept", cn: "[v.] 接受；接纳", rel: "Acceptable", col: "accept A into B\naccept a proposal", note: "Acceptable [adj.] 可接受的" },
+            { w: "Concern", cn: "[n.] 担心 [v.] 涉及", rel: "To whom it may concern", col: "concern about/over\nbe concerned with", note: "To whom it may concern (敬启者)" },
+            { w: "Conduct", cn: "[v.] 执行；指挥", rel: "Inspection / Survey", col: "conduct research\nconduct a survey", note: "必背搭配: conduct an inspection" },
+            { w: "Resource", cn: "[n.] 资源", rel: "Human Resources (HR)", col: "natural resources (自然资源)", note: "HR = Human Resources" },
+            { w: "Access", cn: "[n.] 进入权 [v.] 存取", rel: "v.无to / n.有to", col: "have access to (n.)\naccess the file (v.)", note: "口诀: 名词有桥(to)才能过，动词直接跨过去" },
+            { w: "Candidate", cn: "[n.] 候选人", rel: "Job candidate", col: "successful candidate (被录取的)\njob candidate", note: "求职者" },
+            { w: "Advance", cn: "[n.] 进步 [v.] 前进", rel: "In advance", col: "in advance (预先)\nadvance notice", note: "in advance = beforehand" },
+            { w: "Profit", cn: "[n.] 利润 [v.] 获益", rel: "Benefit", col: "net profit (净利润)\nprofit from (获益)", note: "generate a profit" },
+            { w: "Mention", cn: "[v.] 提及", rel: "Not to mention", col: "mention A to B\nnot to mention (更不用说)", note: "避坑: 不能说 mention about" },
+            { w: "Retirement", cn: "[n.] 退休", rel: "Retire", col: "retirement party\nearly retirement", note: "提前退休" },
+            { w: "Statement", cn: "[n.] 声明；报表", rel: "Bank statement", col: "bank statement (流水)\nissue a statement", note: "银行对账单" },
+            { w: "Executive", cn: "[n.] 高管 [adj.] 行政的", rel: "CEO", col: "Chief Executive Officer\nexecutive suite", note: "CEO = Chief Executive Officer" },
+            { w: "Locate", cn: "[v.] 找到...位置; 坐落于", rel: "Location", col: "locate the missing file\nbe located in (坐落于)", note: "被动态 be located in 表示位置" },
+            { w: "Participant", cn: "[n.] 参与者", rel: "Participate in", col: "participant in the seminar", note: "动词: Participate in" },
+            { w: "Reserve", cn: "[v.] 预订; 保留", rel: "Reservation", col: "reserve a room\nreserve the right to", note: "in reserve (备用)" },
+            { w: "Expense", cn: "[n.] 费用，开支", rel: "Cost", col: "travel expenses (差旅费)\nat the expense of", note: "at the expense of (以...为代价)" },
+            { w: "Opportunity", cn: "[n.] 机会", rel: "Chance", col: "opportunity to do sth\ncareer opportunity", note: "职涯机会" },
+            { w: "Transfer", cn: "[v./n.] 转移；转账", rel: "Move", col: "transfer to a branch\nbank transfer", note: "调职 / 转账" },
+            { w: "Refund", cn: "[n.] 退款 [v.] 退还", rel: "Reimburse", col: "full refund (全额)\nissue a refund", note: "发放退款" },
+            { w: "Expand", cn: "[v.] 扩张，扩大", rel: "Expansion", col: "expand the business\nexpand into new markets", note: "进军新市场" },
+            { w: "Prepare", cn: "[v.] 准备", rel: "Preparation", col: "prepare for (为...准备)\nbe prepared to", note: "prepare for sth" },
+            { w: "Register", cn: "[v.] 注册，登记", rel: "Registration", col: "register for a conference\n(= sign up for)", note: "名词: Registration" },
+            { w: "Benefit", cn: "[n.] 好处 [v.] 有益于", rel: "Beneficial", col: "benefit from (从...获益)\nemployee benefits", note: "员工福利" },
+            { w: "Receipt", cn: "[n.] 收据；收到", rel: "Receive", col: "original receipt (原件)\nupon receipt of", note: "upon receipt of (一收到...时)" },
+            { w: "Organization", cn: "[n.] 组织，机构", rel: "Organize", col: "non-profit organization\n(非营利组织)", note: "NGO" },
+            { w: "Colleague", cn: "[n.] 同事", rel: "Coworker", col: "work with colleagues", note: "同义词: Associate / Coworker" },
+            { w: "Replace", cn: "[v.] 取代，更换", rel: "Replacement", col: "replace A with B\n(用B取代A)", note: "注意介词 with" },
+            { w: "Despite", cn: "[prep.] 尽管", rel: "In spite of", col: "Despite the rain...", note: "避坑: 绝对没有 Despite of!" },
+            { w: "Clear", cn: "[v.] 清除; 通过 [adj.] 清楚", rel: "Crystal clear", col: "clear customs (通关)\nclear the table", note: "crystal clear (非常清楚)" },
+            { w: "Forward", cn: "[v.] 转寄 [adv.] 向前", rel: "Look forward to", col: "forward A to B\nlook forward to doing", note: "look forward to + doing (期待)" }
+        ];
+
+        // --- 逻辑处理 ---
+        let cards = [...rawData];
+        let currentIndex = 0;
+        let isFlipped = false;
+
+        const cardEl = document.getElementById('card');
+        const wordEl = document.getElementById('wordDisplay');
+        const cnEl = document.getElementById('cnDisplay');
+        const relEl = document.getElementById('relatedDisplay');
+        const colEl = document.getElementById('collocationDisplay');
+        const noteEl = document.getElementById('noteDisplay');
+        const progEl = document.getElementById('progress');
+
+        function init() {
+            renderCard();
+        }
+
+        function renderCard() {
+            const item = cards[currentIndex];
+            wordEl.textContent = item.w;
+            cnEl.textContent = item.cn;
+            relEl.textContent = item.rel;
+            colEl.innerHTML = item.col.replace(/\n/g, '<br>'); // 支持换行
+            noteEl.textContent = item.note;
+            progEl.textContent = `${currentIndex + 1} / ${cards.length}`;
+            
+            // 重置状态
+            cardEl.classList.remove('is-flipped');
+            isFlipped = false;
+        }
+
+        cardEl.addEventListener('click', () => {
+            isFlipped = !isFlipped;
+            cardEl.classList.toggle('is-flipped');
+        });
+
+        function changeCard(dir) {
+            const nextIndex = currentIndex + dir;
+            if (nextIndex >= 0 && nextIndex < cards.length) {
+                currentIndex = nextIndex;
+                renderCard();
+            }
+        }
+
+        function shuffleCards() {
+            for (let i = cards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [cards[i], cards[j]] = [cards[j], cards[i]];
+            }
+            currentIndex = 0;
+            renderCard();
+            if(navigator.vibrate) navigator.vibrate(50);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                cardEl.click();
+            } else if (e.code === 'ArrowRight') changeCard(1);
+            else if (e.code === 'ArrowLeft') changeCard(-1);
+        });
+
+        // 启动！
+        init();
+    </script>
+</body>
+</html>
