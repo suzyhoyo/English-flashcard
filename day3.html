@@ -218,4 +218,51 @@
             
             // 进度条
             document.getElementById('counter').innerText = (idx + 1) + " / " + cards.length;
-            document.getElementById('fill').style.width = ((idx + 1) / cards.length * 10
+            document.getElementById('fill').style.width = ((idx + 1) / cards.length * 100) + "%";
+
+            cardEl.classList.remove('is-flipped');
+        }
+
+        cardEl.addEventListener('click', () => {
+            cardEl.classList.toggle('is-flipped');
+        });
+
+        // --- 新增：上一个 ---
+        function prevCard() {
+            // 如果当前是第一个(0)，就跳到最后一个；否则减1
+            idx = (idx - 1 + cards.length) % cards.length;
+            render();
+        }
+
+        // --- 下一个 ---
+        function nextCard() {
+            idx = (idx + 1) % cards.length;
+            render();
+        }
+
+        function markMastered() {
+            cards.splice(idx, 1);
+            if(idx >= cards.length) idx = 0;
+            render();
+        }
+
+        function speak(e) {
+            e.stopPropagation();
+            const text = cards[idx].w.replace(/ vs\.? /i, " versus ");
+            const u = new SpeechSynthesisUtterance(text);
+            u.lang = 'en-US';
+            u.rate = 0.9;
+            speechSynthesis.speak(u);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if(e.code === 'Space') { e.preventDefault(); cardEl.click(); }
+            if(e.code === 'ArrowRight') nextCard();
+            // 新增：左键支持
+            if(e.code === 'ArrowLeft') prevCard();
+        });
+
+        render();
+    </script>
+</body>
+</html>
